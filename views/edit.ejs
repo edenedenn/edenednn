@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    label{
+        font-size: 1.3em;
+    }
+    p{
+        font-size: 1.3em;
+    }
+    </style>
+</head>
+<body>
+    <div class="jumbotron text-center">
+        <h1>Update Book Information</h1>
+    </div>
+    <form action="/update" method="POST">
+
+    <label for="bookID" value="item.bookID"><b>Book ID*: <%= item.bookID %></b></label><br><br>
+    
+    <input type="hidden" id="postId" name="postId" value="<%= item.bookID %>" />
+     
+    <label for="name"><b>Book Name*:</b></label>
+    <input type="text" id="name" name="name" class="form-control" placeholder="" value= "<% if (item.name) { %><%= item.name %><% } %>" /><br><br>
+                
+    <label for="author"><b>Author:</b></label>
+    <input type="text" id="author" name="author" class="form-control" placeholder="" value ="<% if (item.author) { %><%= item.author %><% } %>" /><br><br>
+
+    <label for="publisher"><b>Publisher:</b></label>
+    <input type="text" id="publisher" name="publisher" class="form-control" placeholder="" value ="<% if (item.publisher) { %><%= item.publisher %><% } %>" /><br><br>
+                
+    <label for="ISBN"><b>ISBN:</b></label>
+    <input type="text" id="ISBN" name="ISBN" class="form-control" placeholder="" value ="<% if (item.ISBN) { %><%= item.ISBN %><% } %>"/> <br><br>
+                
+    <label for="genre"><b>Genre:</b></label>
+    <input type="text" id="genre" name="genre" class="form-control" placeholder="" value = "<% if (item.genre) { %><%= item.genre %><% } %>" /><br><br>
+                
+    <label for="description"><b>Description:</b></label><br>
+    <textarea name="description" cols="50" rows="10" placeholder="" value = "<% if (item.description) { %><%= item.description %><% } %>" /></textarea><br>
+
+    <input type="submit" value="update">
+</html>

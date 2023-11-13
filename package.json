@@ -1,19 +1,18 @@
 {
     "name": "server",
     "description": "COMPS381F project",
-    "author": "So Cheuk Him, Chen Zhanyi, Hau Hei Wan",
+    "author": "DSAI2024_graduates",
     "version": "0.0.1",
     "engines": {
         "node": "^14.15.1"
     },
     "dependencies": {
-        "cookie-session": "latest",
+        "assert": "^1.4.1",
         "body-parser": "^1.18.3",
+        "cookie-session": "^2.0.0",
         "ejs": "*",
         "express": "*",
-        "mongodb": "3.6.5",
-        "assert": "^1.4.1"
-        
+        "mongodb": "3.6.5"
     },
     "engine": "node >= 12.0.0",
     "scripts": {

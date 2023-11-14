@@ -7,22 +7,24 @@
     <title>Details</title>
     <style>
         p{
-            font-size: 1.3em;
+            font-size: 3.0em;
         }
     </style>
 </head>
 <body>
     <div class="jumbotron text-center">
-        <h1>Book Information</h1>
+        <h1>Library Document Information</h1>
     </div>
     <div class="row">
-        <p>Book ID:  <% if (typeof (item.bookID) !== "undefined") { %><%= item.bookID %><% } %></p><br>
-        <p>Book Name:  <% if (typeof (item.name) !== "undefined") { %><%= item.name %><% } %></p><br>
-        <p>Author:  <% if (typeof (item.author) !== "undefined") { %><%= item.author %><% } %></p><br>
-        <p>Publisher:  <% if (typeof (item.publisher) !== "undefined") { %><%= item.publisher %><% } %></p><br>
-        <p>ISBN:  <% if (typeof (item.ISBN) !== "undefined") { %><%= item.ISBN %><% } %></p><br>
-        <p>Genre:  <% if (typeof (item.genre) !== "undefined") { %><%= item.genre %><% } %></p><br>
-        <p>Description:  <% if (typeof (item.description) !== "undefined") { %><%= item.description %><% } %></p><br>
+        <p>User_Name:  <% if (typeof (item.UserName) !== "undefined") { %><%= item.UserName %><% } %></p><br>
+        <p>Date:  <% if (typeof (item.Date) !== "undefined") { %><%= item.Date %><% } %></p><br>
+        
+        <p>Book_Type:  <% if (typeof (item.Book_Information.Book_Type) !== "undefined") { %><%= item.Book_Information.Book_Type %><% } %></p><br>
+        <p>Book_Name:  <% if (typeof (item.Book_Information.Book_Name) !== "undefined") { %><%= item.Book_Information.Book_Name %><% } %></p><br>
+        
+        <p>Borrow_or_Return:  <% if (typeof (item.Borrow_or_Return) !== "undefined") { %><%= item.Borrow_or_Return %><% } %></p><br>
+        <p>Telephone_Number:  <% if (typeof (item.Telephone_Number) !== "undefined") { %><%= item.Telephone_Number %><% } %></p><br>
+        <p>Remark:  <% if (typeof (item.Remark) !== "undefined") { %><%= item.Remark %><% } %></p><br>
     </div>
         <a href="/edit?_id=<%= item._id %>" >Update the information</a><br><br>
         <a href="/delete?_id=<%= item._id %>&owner=<%= item.ownerID %>">Delete the information</a><br><br>

@@ -3,8 +3,7 @@ const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 
-
-const mongourl = ''; 
+const mongourl = 'mongodb+srv://s1299841:1303313524Aa@cluster0.uuchtz5.mongodb.net/?retryWrites=true&w=majority'; 
 const dbName = 'test';
 
 const express = require('express');
@@ -61,6 +60,38 @@ const findDocument =  function(db, criteria, callback){
         assert.equal(err, null);
         console.log(`findDocument: ${docs.length}`);
         return callback(docs);
+    });
+}
+
+const handle_Find = function(res, criteria){
+    const client = new MongoClient(mongourl);
+    client.connect(function(err) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+        const db = client.db(dbName);
+
+        findDocument(db, criteria, function(docs){
+            client.close();
+            console.log("Closed DB connection");
+            res.status(200).render('display', {nItems: docs.length, items: docs});
+        });
+    });
+}
+
+const handle_Details = function(res, criteria) {
+    const client = new MongoClient(mongourl);
+    client.connect(function(err) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+        const db = client.db(dbName);
+
+        let user = {};
+        user['_id'] = ObjectID(criteria._id)
+        findDocument(db, user, function(docs){ 
+            client.close();
+            console.log("Closed DB connection");
+            res.status(200).render('details', {item: docs[0]});
+        });
     });
 }
 
@@ -130,18 +161,18 @@ app.post('/create', function(req, res){
         documents["_id"] = ObjectID;        
 	documents["UserName"] = req.body.UserName;	
 	documents['Date']= req.body.date;
-	documents['Borrow or Return']= req.body.borrow_or_return;
+	documents['Borrow_or_Return']= req.body.borrow_or_return;
 	//documents['Book Type']= req.body.book_type;
 	//documents['Book Name']= req.body.book_name;
-        documents['Telephone Number']= req.body.phone_num;
-        documents['remark']= req.body.remark;
+        documents['Telephone_Number']= req.body.phone_num;
+        documents['Remark']= req.body.remark;
         
         var bookinfo ={};
-        bookinfo['Book Type'] = req.body.book_type;
+        bookinfo['Book_Type'] = req.body.book_type;
         if(req.body.book_name){
-            bookinfo['Book Name'] = req.body.book_name;
+            bookinfo['Book_Name'] = req.body.book_name;
         }
-        documents['Book Information']= bookinfo;
+        documents['Book_Information']= bookinfo;
         
         console.log("...putting data into documents");
         
@@ -164,6 +195,61 @@ app.post('/create', function(req, res){
     });
     
 });
+
+app.post('/search', function(req, res){
+    const client = new MongoClient(mongourl);
+    client.connect(function(err){
+        assert.equal(null, err);
+        console.log("Connected successfully to the DB server.");
+        const db = client.db(dbName);
+    
+    var searchID={};
+    searchID['UserName'] = req.body.UserName;
+    
+    if (searchID.UserName){
+    console.log("...Searching the document");
+    findDocument(db, searchID, function(docs){
+            client.close();
+            console.log("Closed DB connection");
+            res.status(200).render('display', {nItems: docs.length, items: docs});
+        });
+    }
+    else{
+    console.log("Invalid Entry - UserName is compulsory for searching!");
+    res.status(200).redirect('/find');
+    }         	
+	});
+});
+
+app.get('/find', function(req, res){
+    return res.status(200).render("search");
+});
+
+app.get('/details', function(req,res){
+    handle_Details(res, req.query);
+});
+
+// Restful find
+app.get('/api/item/UserName/:UserName', function(req,res) {
+    if (req.params.UserName) {
+        let criteria = {};
+        criteria['UserName'] = req.params.UserName;
+        const client = new MongoClient(mongourl);
+        client.connect(function(err) {
+            assert.equal(null, err);
+            console.log("Connected successfully to server");
+            const db = client.db(dbName);
+
+            findDocument(db, criteria, function(docs){
+                client.close();
+                console.log("Closed DB connection");
+                res.status(200).json(docs);
+            });
+        });
+    } else {
+        res.status(500).json({"error": "missing restaurant id"});
+    }
+})
 
 
 

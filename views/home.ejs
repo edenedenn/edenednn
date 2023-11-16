@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Library Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="jumbotron text-center">
-        <h1>Book Information Management System</h1>
+    <div class="jumbotron text-center bg-primary text-white">
+        <h1>Welcome to the Library Management System</h1>
     </div>
-    <div class="row ml-md-auto">
-        <a href="/create" role="button">Create New Book Information</a> <br>
-        <a href="/find" role="button">Find Book Information by book ID</a> <br>
-        <a href="/list" role="button">Show all book ID information</a> <br>
-        <a href="/logout" role="button">Logout</a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <a href="/create" class="btn btn-info btn-block">Add New Book</a>
+                <a href="/find" class="btn btn-info btn-block">Search Book by ID</a>
+                <a href="/list" class="btn btn-info btn-block">View All Books</a>
+                <a href="/logout" class="btn btn-danger btn-block">Sign Out</a>
+            </div>
+        </div>
     </div>
-
 </body>
 </html>

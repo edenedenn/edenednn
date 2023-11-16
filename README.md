@@ -3,7 +3,8 @@ Restaurant management system
 Group: 35
 Name: 
 So Cheuk Him(s12283545),
-yy (00000100)
+abc,
+def
 
 Application link: https://project-sample.onrender.com/
 
